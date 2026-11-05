@@ -1,0 +1,14 @@
+; moebius.fi DNS records as served by ns1/ns2.domainhotelli.fi on 2026-11-05.
+; Import into Cloudflare: DNS > Records > Import and Export > Import DNS records,
+; with 'Proxy imported DNS records' left OFF.
+$ORIGIN moebius.fi.
+$TTL 3600
+moebius.fi.	3600	IN	A	63.34.140.73
+moebius.fi.	3600	IN	MX	0 moebius-fi.mail.protection.outlook.com.
+moebius.fi.	3600	IN	TXT	"v=spf1 include:spf.protection.outlook.com ~all"
+_dmarc.moebius.fi.	3600	IN	TXT	"v=DMARC1; p=reject; rua=mailto:dmarc@mkpaamd0zap.uriports.com; ruf=mailto:dmarc@mkpaamd0zap.uriports.com; fo=1:d:s"
+autodiscover.moebius.fi.	3600	IN	CNAME	autodiscover.outlook.com.
+default._domainkey.moebius.fi.	3600	IN	TXT	"v=DKIM1; k=rsa; p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqnnbYrPrqhSyJygwRxwNehMgP3k8/YjZLVkcCcp6xYrFssfwd806MltsW7f+D65WSxJxf+shWsbwUwFgcwpU7OiIcj8r80g9hLTALMUXsyvtHlwujUbie/xtuw8Mq7LkP+bHwrBWA/zAcPqKK3eCy7wOP57cavUQy5BsKCGqJGP6sE56jf/dKXmWPPUEfdc83" "X4bMWXOtBAPXSrZK9XPsxrqDSjZDREOhdc8FnQfOH1pddzsNGbcKlIhetKgeW3wmRK0Mky0RLxh/D6NOhVlmirwoWJ7d3KLaMH5r+I5nXyJVMeNHGpBSjkG2OlWCb+mg7WJMSQ7wYhnAVlVRNdIoQIDAQAB;"
+selector1._domainkey.moebius.fi.	3600	IN	CNAME	selector1-moebius-fi._domainkey.Moebiusfi.onmicrosoft.com.
+selector2._domainkey.moebius.fi.	3600	IN	CNAME	selector2-moebius-fi._domainkey.Moebiusfi.onmicrosoft.com.
+www.moebius.fi.	3600	IN	CNAME	d38a41nan5fkip.cloudfront.net.
