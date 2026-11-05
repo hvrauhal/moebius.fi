@@ -1,0 +1,15 @@
+# Local dev server with live reload, running inside the pinned Node image.
+#   docker compose up dev        -> http://localhost:4321
+services:
+  dev:
+    build:
+      context: .
+      target: deps
+    command: npx astro dev --host 0.0.0.0
+    ports:
+      - "4321:4321"
+    volumes:
+      - ./src:/app/src
+      - ./public:/app/public
+      - ./astro.config.mjs:/app/astro.config.mjs
+      - ./tsconfig.json:/app/tsconfig.json
