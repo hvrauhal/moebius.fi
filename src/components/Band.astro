@@ -12,11 +12,15 @@ interface Props {
 }
 
 const { image, heading, cta, level = 2 } = Astro.props;
-const bg = await getImage({ src: resolveImage(image), width: 1600, format: 'webp' });
+const meta = resolveImage(image);
+const bg = await getImage({ src: meta, width: 1600, format: 'webp' });
+// A page hero keeps the photo's own proportions, so the whole picture is
+// shown at any width instead of a zoomed, cropped slice.
+const ratio = level === 1 ? `;aspect-ratio:${meta.width}/${meta.height}` : '';
 const Heading = level === 1 ? 'h1' : 'h2';
 ---
 
-<section class="band" style={`background-image:url(${bg.src})`}>
+<section class="band" style={`background-image:url(${bg.src})${ratio}`}>
   <Heading>{heading}</Heading>
   {cta && <p><a href={cta.href}>{cta.label}</a></p>}
 </section>

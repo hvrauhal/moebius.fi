@@ -28,7 +28,7 @@ main > *:not(.band):not(.gallery):not(.columns):not(.wide) { max-width:760px; ma
 
 /* Photo bands */
 .band { background:#3b7fb8 center/cover; color:#fff; padding:40px 20px; text-align:center; margin:56px 0 0; }
-.band:first-child { margin-top:0; min-height:600px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+.band:first-child { margin-top:0; min-height:240px; display:flex; flex-direction:column; justify-content:center; align-items:center; }
 .band h1, .band h2 { color:#fff; font-weight:700; margin:0; }
 .band h1 { font-size:clamp(36px,8vw,100px); margin-bottom:32px; }
 .band h2 { font-size:clamp(32px,5vw,64px); }
