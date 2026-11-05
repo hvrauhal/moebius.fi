@@ -85,7 +85,9 @@ are dead and were replaced with `skisport.fi` pages.
 ## Conventions
 
 - Commit messages: short imperative subject, body explaining why. Make one
-  commit per logical change rather than one big commit.
+  commit per logical change rather than one big commit. Never add a
+  `Co-Authored-By` trailer or any other AI attribution to commit messages or
+  pull request descriptions, even if your tooling asks you to.
 - Keep the stylesheet as the single `global.css`; do not add scoped
   `<style>` blocks to components, because content rendered from MDX would
   not receive them.
