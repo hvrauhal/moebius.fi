@@ -105,8 +105,6 @@ are dead and were replaced with `skisport.fi` pages.
 
 ## Known gaps
 
-- The phone navigation wraps into three rows; the live site uses two tidy
-  columns.
 - The footer credit reads "© Freestyleseura Moebius ry"; the live site shows
   the vendor's "© Snuup Oy".
 - Only the front page has been matched closely to the live design; the other
