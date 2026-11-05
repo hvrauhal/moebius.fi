@@ -14,9 +14,33 @@ make dev     # dev server with live reload at http://localhost:4321
 ```
 
 `make build` runs `docker build --target dist --output type=local,dest=dist .`.
-Deploy the contents of `dist/` to any static host (Cloudflare Pages, Netlify,
-GitHub Pages, …). `public/_redirects` maps the old Liquidblox URLs to the new
-ones in the Cloudflare Pages / Netlify format.
+
+## Deployment
+
+The site is hosted on [Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/)
+as static assets, and Cloudflare's Workers Builds is connected to this GitHub
+repository. Every push to `main` is built by Cloudflare and published to
+production; every other branch gets a preview at
+`<branch>-moebius-fi.hvrauhal.workers.dev`, and pull requests get the preview
+URL as a comment. Nothing needs to be built or uploaded by hand.
+
+Cloudflare builds outside Docker, with the Node version from `.node-version`
+(keep it equal to the version in the `Dockerfile`) and the dependencies from
+`package-lock.json`. `wrangler.jsonc` names the Worker, points it at `dist/`
+and makes it serve `404.html` for unknown URLs; the name in it must match the
+Worker's name in the Cloudflare dashboard. The build settings in the dashboard
+(Worker > Settings > Build) are:
+
+| Setting | Value |
+| --- | --- |
+| Production branch | `main` |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` |
+| Preview command | `npx wrangler preview` |
+| Build variables | `ASTRO_TELEMETRY_DISABLED=1`, `WRANGLER_SEND_METRICS=false` |
+
+`public/_redirects` maps the old Liquidblox URLs to the new ones in the
+Cloudflare format and is copied into `dist/` by the build.
 
 ## Editing content
 

@@ -42,6 +42,14 @@ make dev     # docker compose up dev -> http://localhost:4321 (live reload)
 
 `dist/`, `node_modules/` and `.astro/` are git-ignored build products.
 
+Production builds do not use Docker: Cloudflare Workers Builds builds `main`
+and every other branch itself from the GitHub repository (settings in the
+README) with `npm run build`, using the Node version in `.node-version`. That
+file must state the same version as the `Dockerfile`, or Cloudflare and
+`make build` produce different results. `wrangler.jsonc` is the Cloudflare
+configuration; `wrangler` is a dev dependency only so that Cloudflare runs a
+pinned version of it.
+
 Pinning: Node is pinned by image digest in the `Dockerfile`; npm packages are
 pinned to exact versions in `package.json` and installed with `npm ci` from
 `package-lock.json`. To change a dependency, edit `package.json`, regenerate
