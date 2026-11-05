@@ -9,5 +9,9 @@
     "directory": "./dist",
     // Serve dist/404.html with status 404 for unknown URLs (default: empty body).
     "not_found_handling": "404-page"
-  }
+  },
+  // Required (even empty) for `npx wrangler preview`, which Workers Builds
+  // runs for every branch other than main. Assets and compatibility settings
+  // stay at the top level and apply to previews as well.
+  "previews": {}
 }
