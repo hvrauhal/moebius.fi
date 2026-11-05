@@ -4,6 +4,8 @@
 # To bump: `docker pull node:<ver>-bookworm-slim` and copy the new RepoDigest here.
 FROM node:22.23.4-bookworm-slim@sha256:4b150b48b4116e2a22f2c39cc27025fbf4f153e2078fd3b14d159fdb5c7279da AS deps
 WORKDIR /app
+# No usage reporting to the Astro project from these containers.
+ENV ASTRO_TELEMETRY_DISABLED=1
 COPY package.json package-lock.json ./
 RUN npm ci --no-audit --no-fund
 
