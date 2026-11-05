@@ -53,7 +53,7 @@ main > iframe { display:block; width:100%; min-height:600px; border:0; }
 
 /* Lists */
 li { margin-top:4px; }
-main > ul:not(.band):not(.gallery) { padding-left:40px; margin-top:0; margin-bottom:0; }
+main > ul:not(.band):not(.gallery):not(.columns):not(.wide) { padding-left:40px; margin-top:0; margin-bottom:0; }
 
 /* Footer */
 .site-footer { background:#1a4b82 center/cover; color:var(--pale); position:relative; padding:56px 4vw 24px; }
