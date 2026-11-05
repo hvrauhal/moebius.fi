@@ -8,6 +8,7 @@ import Columns from '../components/Columns.astro';
 import Gallery from '../components/Gallery.astro';
 import Logos from '../components/Logos.astro';
 import Social from '../components/Social.astro';
+import Wide from '../components/Wide.astro';
 
 export async function getStaticPaths() {
   const pages = await getCollection('pages', (page) => page.id !== '404');
@@ -23,5 +24,5 @@ const { Content } = await render(page);
 ---
 
 <Base {...page.data} slug={slug}>
-  <Content components={{ Band, Button, Center, Columns, Gallery, Logos, Social }} />
+  <Content components={{ Band, Button, Center, Columns, Gallery, Logos, Social, Wide }} />
 </Base>

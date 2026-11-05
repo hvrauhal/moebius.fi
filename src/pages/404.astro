@@ -8,6 +8,7 @@ import Columns from '../components/Columns.astro';
 import Gallery from '../components/Gallery.astro';
 import Logos from '../components/Logos.astro';
 import Social from '../components/Social.astro';
+import Wide from '../components/Wide.astro';
 
 const page = await getEntry('pages', '404');
 if (!page) throw new Error('src/content/pages/404.mdx is missing');
@@ -15,5 +16,5 @@ const { Content } = await render(page);
 ---
 
 <Base {...page.data} slug="404">
-  <Content components={{ Band, Button, Center, Columns, Gallery, Logos, Social }} />
+  <Content components={{ Band, Button, Center, Columns, Gallery, Logos, Social, Wide }} />
 </Base>

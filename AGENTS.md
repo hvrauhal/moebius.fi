@@ -20,7 +20,7 @@ deployment). This file covers how to work on the repo safely.
 src/content/pages/*.mdx   one file per page; file name = URL slug
 src/content.config.ts     frontmatter schema (title, lang, hero)
 src/layouts/Base.astro    <html>, header, nav, footer
-src/components/           Band, Button, Center, Columns, Gallery, Logos, Social
+src/components/           Band, Button, Center, Columns, Gallery, Logos, Social, Wide
 src/lib/images.ts         resolves "photo.jpg" -> src/assets/photo.jpg
 src/assets/               all images (optimised at build time, never hotlinked)
 src/styles/global.css     the only stylesheet
@@ -53,8 +53,11 @@ Astro telemetry is disabled in the image.
 - Pages are MDX. Keep them readable by non-developers: plain Markdown, the
   listed components, and nothing else. Components are injected by name
   (see `src/pages/[...slug].astro`), so content files must not `import`.
-- `Columns` and `Center` wrap Markdown; leave blank lines around the Markdown
-  inside their `<div>`s or it will not be parsed.
+- `Columns`, `Center` and `Wide` wrap Markdown; leave blank lines around the
+  Markdown inside them or it will not be parsed.
+- `Gallery` is for photos and crops them to 3:2. Screenshots of result tables
+  and other images that must stay whole go in `<Wide>` as plain Markdown
+  images.
 - Images go in `src/assets/` and are referred to by file name in components
   (`<Gallery images={["a.jpg"]} />`) or by relative path in Markdown
   (`![](../../assets/a.jpg)`). Never link to `images.liquidblox.com`.
@@ -92,9 +95,6 @@ are dead and were replaced with `skisport.fi` pages.
 
 ## Known gaps
 
-- `Gallery` crops images to 3:2. The SkiTour archive pages (2024–2026) use it
-  for screenshots of result tables, which get cropped; they need a different
-  component or plain images.
 - The phone navigation wraps into three rows; the live site uses two tidy
   columns.
 - The footer credit reads "© Freestyleseura Moebius ry"; the live site shows

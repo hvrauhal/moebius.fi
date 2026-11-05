@@ -47,6 +47,7 @@ without imports:
 | `<Logos images={["sponsor.png"]} />` | Row of sponsor logos; add `large` for the big front-page row |
 | `<Columns><div>…</div><div>…</div></Columns>` | Two side-by-side columns (stacked on phones); leave blank lines around the Markdown inside each `<div>` |
 | `<Center>…</Center>` | Centres the wrapped Markdown, e.g. a heading |
+| `<Wide>…</Wide>` | Full content width for the wrapped Markdown; images inside are shown whole and fitted to the width (use for result tables) |
 | `<Button href="/jasenyys/">Liity jäseneksi</Button>` | Gold button |
 | `<Social />` | Facebook / Instagram / YouTube icons |
 
