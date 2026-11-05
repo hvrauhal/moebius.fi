@@ -1,0 +1,13 @@
+// Cloudflare Workers settings. The site is deployed by Workers Builds from
+// GitHub; the Worker name here must match the name in the Cloudflare dashboard.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "moebius-fi",
+  "compatibility_date": "2026-11-05",
+  "assets": {
+    // The static site that `npm run build` writes.
+    "directory": "./dist",
+    // Serve dist/404.html with status 404 for unknown URLs (default: empty body).
+    "not_found_handling": "404-page"
+  }
+}
