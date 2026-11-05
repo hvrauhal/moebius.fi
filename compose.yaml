@@ -5,7 +5,11 @@ services:
     build:
       context: .
       target: deps
-    command: npx astro dev --host 0.0.0.0
+    # --ignore-lock: Astro records the dev server's PID in a lock file; inside a
+    # container PIDs are reused, so a stale lock from a previous run would
+    # otherwise be mistaken for a live server.
+    command: npx astro dev --host 0.0.0.0 --ignore-lock
+    init: true
     ports:
       - "4321:4321"
     volumes:
