@@ -1,0 +1,10 @@
+---
+// Centred gold button. Usage: <Button href="/jasenyys/">Liity jäseneksi</Button>
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<p class="cta"><a href={href}><slot /></a></p>

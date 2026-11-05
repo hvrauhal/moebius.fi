@@ -1,0 +1,19 @@
+---
+// Facebook / Instagram / YouTube icon row. Usage: <Social />
+import { Image } from 'astro:assets';
+import facebook from '../assets/moebiusfacebook.png';
+import instagram from '../assets/moebiusinstagram.png';
+import youtube from '../assets/ytlogofullcoloralmostblackdigital.png';
+
+const links = [
+  { href: 'https://www.facebook.com/moebiusfreestyle', label: 'Facebook', img: facebook },
+  { href: 'https://www.instagram.com/moebiusfreestyle/', label: 'Instagram', img: instagram },
+  { href: 'https://www.youtube.com/@MoebiusFreestyle', label: 'YouTube', img: youtube },
+];
+---
+
+<div class="social">
+  {links.map(({ href, label, img }) => (
+    <a href={href} aria-label={label}><Image src={img} alt="" height={112} /></a>
+  ))}
+</div>

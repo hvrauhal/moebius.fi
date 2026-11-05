@@ -1,0 +1,15 @@
+---
+// Grid of photos. Usage in MDX: <Gallery images={["a.jpg", "b.jpg"]} />
+import { Image } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Props {
+  images: string[];
+}
+
+const images = Astro.props.images.map(resolveImage);
+---
+
+<div class="gallery">
+  {images.map((img) => <Image src={img} alt="" width={800} />)}
+</div>

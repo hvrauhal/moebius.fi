@@ -1,0 +1,25 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import Button from '../components/Button.astro';
+import Gallery from '../components/Gallery.astro';
+import Logos from '../components/Logos.astro';
+import Social from '../components/Social.astro';
+
+export async function getStaticPaths() {
+  const pages = await getCollection('pages', (page) => page.id !== '404');
+  return pages.map((page) => ({
+    params: { slug: page.id === 'index' ? undefined : page.id },
+    props: { page },
+  }));
+}
+
+const { page } = Astro.props;
+const slug = page.id === 'index' ? '' : page.id;
+const { Content } = await render(page);
+---
+
+<Base {...page.data} slug={slug}>
+  <Content components={{ Band, Button, Gallery, Logos, Social }} />
+</Base>

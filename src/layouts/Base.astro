@@ -1,0 +1,95 @@
+---
+import '../styles/global.css';
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
+import Band from '../components/Band.astro';
+import logo from '../assets/moebiuslogo5001503.png';
+import footerPhoto from '../assets/freestyleskiingmoebius.jpg';
+
+interface Props {
+  title: string;
+  lang?: string;
+  description?: string;
+  slug: string;
+  hero?: {
+    image: ImageMetadata;
+    heading: string;
+    cta?: { label: string; href: string };
+  };
+}
+
+const {
+  title,
+  lang = 'fi',
+  description = 'Freestyleseura Moebius ry on vuonna 1980 perustettu pääkaupunkiseudulla toimiva freestyleseura.',
+  slug,
+  hero,
+} = Astro.props;
+
+const nav = [
+  ['Etusivu', ''],
+  ['Ajankohtaista', 'ajankohtaista'],
+  ['SkiTour', 'skitour'],
+  ['Jäsenyys', 'jasenyys'],
+  ['Harraste', 'harraste'],
+  ['Kuvagalleria', 'kuvagalleria'],
+  ['Yhteystiedot', 'yhteystiedot'],
+  ['In English', 'in-english'],
+  ['På Svenska', 'pa-svenska'],
+];
+
+const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' });
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href={logo.src} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="logo" href="/"><Image src={logo} alt="Moebius Freestyle" height={112} /></a>
+      <nav>
+        {nav.map(([label, path]) => (
+          <a href={path ? `/${path}/` : '/'} aria-current={path === slug ? 'page' : undefined}>{label}</a>
+        ))}
+      </nav>
+    </header>
+
+    <main>
+      {hero && <Band image={hero.image} heading={hero.heading} cta={hero.cta} level={1} />}
+      <slot />
+    </main>
+
+    <footer class="site-footer" style={`background-image:url(${footerBg.src})`}>
+      <div class="footer-inner">
+        <div>
+          <h3>Freestyleseura Moebius ry</h3>
+          <p>
+            <strong>Toiminnanjohtaja</strong><br />
+            Alex Holmbom<br />
+            <a href="mailto:info@moebius.fi">info@moebius.fi</a><br />
+            +358 44 976 0295
+          </p>
+          <p><a href="/tietosuojalupaus/">Tietosuoja</a></p>
+        </div>
+        <div>
+          <p>Freestyleseura Moebius ry on vuonna 1980 perustettu pääkaupunkiseudulla toimiva, perinteikäs freestyleseura.</p>
+          <p><a href="/jasenyys/">Jäsenyys</a></p>
+          <h3>Seuraa meitä somessa!</h3>
+          <p>
+            <a href="https://www.facebook.com/moebiusfreestyle">Facebook</a><br />
+            <a href="https://www.instagram.com/moebiusfreestyle/">Instagram</a><br />
+            <a href="https://www.youtube.com/@MoebiusFreestyle">YouTube</a>
+          </p>
+        </div>
+      </div>
+      <p class="copy">© Freestyleseura Moebius ry</p>
+    </footer>
+  </body>
+</html>

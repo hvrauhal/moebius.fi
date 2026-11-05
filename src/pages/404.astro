@@ -1,0 +1,17 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import Button from '../components/Button.astro';
+import Gallery from '../components/Gallery.astro';
+import Logos from '../components/Logos.astro';
+import Social from '../components/Social.astro';
+
+const page = await getEntry('pages', '404');
+if (!page) throw new Error('src/content/pages/404.mdx is missing');
+const { Content } = await render(page);
+---
+
+<Base {...page.data} slug="404">
+  <Content components={{ Band, Button, Gallery, Logos, Social }} />
+</Base>

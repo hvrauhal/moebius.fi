@@ -1,0 +1,22 @@
+---
+// Full-width photo band with a centred heading and an optional button.
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Props {
+  image: string | ImageMetadata;
+  heading: string;
+  cta?: { label: string; href: string };
+  level?: 1 | 2;
+}
+
+const { image, heading, cta, level = 2 } = Astro.props;
+const bg = await getImage({ src: resolveImage(image), width: 1600, format: 'webp' });
+const Heading = level === 1 ? 'h1' : 'h2';
+---
+
+<section class="band" style={`background-image:url(${bg.src})`}>
+  <Heading>{heading}</Heading>
+  {cta && <p><a href={cta.href}>{cta.label}</a></p>}
+</section>

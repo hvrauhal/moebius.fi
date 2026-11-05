@@ -1,0 +1,14 @@
+# Old Liquidblox URLs -> new ones. Cloudflare Pages / Netlify format.
+/Jasenyys                                /jasenyys/            301
+/Harraste                                /harraste/            301
+/Kuvagalleria                            /kuvagalleria/        301
+/Yhteystiedot                            /yhteystiedot/        301
+/Ajankohtaista                           /ajankohtaista/       301
+/Tietosuojalupaus                        /tietosuojalupaus/    301
+/In+English                              /in-english/          301
+/Pa+Svenska                              /pa-svenska/          301
+/SkiTour+2024                            /skitour-2024/        301
+/SkiTour+2025                            /skitour-2025/        301
+/SkiTour+2026                            /skitour-2026/        301
+/Maajoukkuetoiminta+Moebius+Freestyle    /maajoukkuetoiminta/  301
+/Moebius+Freestyle++Etusivu              /                     301

@@ -1,0 +1,15 @@
+---
+// Row of sponsor / partner logos. Usage: <Logos images={["sglogowhite.png"]} />
+import { Image } from 'astro:assets';
+import { resolveImage } from '../lib/images';
+
+interface Props {
+  images: string[];
+}
+
+const images = Astro.props.images.map(resolveImage);
+---
+
+<div class="partners">
+  {images.map((img) => <Image src={img} alt="" height={144} />)}
+</div>
