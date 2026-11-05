@@ -39,6 +39,9 @@ const nav = [
   ['På Svenska', 'pa-svenska'],
 ];
 
+// Square icons from the shield badge; the wide header logo is squashed in a tab.
+const favicon = await getImage({ src: badge, width: 64, height: 64, format: 'png' });
+const touchIcon = await getImage({ src: badge, width: 180, height: 180, format: 'png' });
 const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' });
 ---
 
@@ -49,7 +52,8 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <link rel="icon" href={logo.src} />
+    <link rel="icon" type="image/png" sizes="64x64" href={favicon.src} />
+    <link rel="apple-touch-icon" sizes="180x180" href={touchIcon.src} />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
