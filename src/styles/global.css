@@ -13,8 +13,8 @@ img { max-width:100%; height:auto; }
 .site-header { display:flex; align-items:center; gap:16px 40px; padding:18px 4vw; background:#fff; position:sticky; top:0; z-index:10; box-shadow:0 1px 4px #0002; }
 .logo img { display:block; height:54px; width:auto; }
 .site-header nav { flex:1; display:flex; flex-wrap:wrap; justify-content:space-evenly; gap:4px 24px; }
-.site-header nav a { color:var(--navy); font-weight:600; text-decoration:none; font-size:14px; padding:6px 0; border-bottom:2px solid transparent; }
-.site-header nav a:hover, .site-header nav a[aria-current] { border-bottom-color:var(--gold); }
+.site-header nav a { color:var(--navy); font-weight:700; text-decoration:none; font-size:16px; padding:6px 0; }
+.site-header nav a:hover, .site-header nav a[aria-current] { color:var(--blue); }
 
 /* Content column */
 main { padding-bottom:56px; }
