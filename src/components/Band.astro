@@ -1,5 +1,8 @@
 ---
-// Full-width photo band with a centred heading and an optional button.
+// Full-width photo band with a centred heading and an optional button,
+// printed poster-style: the photo is duotoned in night blue with a warm
+// glow from below. A page hero (level 1) is taller, gets sun rays behind
+// the title and a cut-paper mountain ridge along its foot.
 import type { ImageMetadata } from 'astro';
 import { getImage } from 'astro:assets';
 import { resolveImage } from '../lib/images';
@@ -9,18 +12,27 @@ interface Props {
   heading: string;
   cta?: { label: string; href: string };
   level?: 1 | 2;
+  eyebrow?: string;
+  sub?: string;
+  tall?: boolean;
 }
 
-const { image, heading, cta, level = 2 } = Astro.props;
+const { image, heading, cta, level = 2, eyebrow, sub, tall = false } = Astro.props;
 const meta = resolveImage(image);
-const bg = await getImage({ src: meta, width: 1600, format: 'webp' });
-// A page hero keeps the photo's own proportions, so the whole picture is
-// shown at any width instead of a zoomed, cropped slice.
-const ratio = level === 1 ? `;aspect-ratio:${meta.width}/${meta.height}` : '';
+const bg = await getImage({ src: meta, width: 1800, format: 'webp' });
 const Heading = level === 1 ? 'h1' : 'h2';
 ---
 
-<section class="band" style={`background-image:url(${bg.src})${ratio}`}>
+<section class:list={['band', { hero: level === 1, tall }]} style={`background-image:url(${bg.src})`}>
+  {level === 1 && <div class="hero-rays" aria-hidden="true" />}
+  {eyebrow && <p class="hero-eyebrow">{eyebrow}</p>}
   <Heading>{heading}</Heading>
+  {sub && <span class="hero-sub">{sub}</span>}
   {cta && <p><a href={cta.href}>{cta.label}</a></p>}
+  {level === 1 && (
+    <svg class="hero-mountains" viewBox="0 0 1600 160" preserveAspectRatio="none" aria-hidden="true">
+      <path class="ridge" d="M0 118 L120 70 L210 96 L330 40 L420 84 L520 58 L640 110 L760 36 L860 92 L980 50 L1090 104 L1200 60 L1310 96 L1420 44 L1530 90 L1600 72 L1600 160 L0 160 Z" />
+      <path class="snow" d="M0 132 L120 86 L210 110 L330 58 L420 100 L520 76 L640 124 L760 54 L860 108 L980 68 L1090 118 L1200 78 L1310 110 L1420 62 L1530 104 L1600 88 L1600 160 L0 160 Z" />
+    </svg>
+  )}
 </section>

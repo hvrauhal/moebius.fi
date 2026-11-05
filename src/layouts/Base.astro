@@ -39,6 +39,14 @@ const nav = [
   ['På Svenska', 'pa-svenska'],
 ];
 
+// Poster chrome around the hero, in the language of the page.
+const eyebrow = { fi: 'Freestyleseura Moebius ry', en: 'Freestyle ski club', sv: 'Freestyleklubb' }[lang] ?? 'Freestyleseura Moebius ry';
+const since = { fi: 'vuodesta 1980', en: 'since 1980', sv: 'sedan 1980' }[lang] ?? 'vuodesta 1980';
+const sub = { fi: 'Helsinki · Talma · Serena · Sveitsi · Ruka', en: 'Helsinki · est. 1980', sv: 'Helsingfors · sedan 1980' }[lang] ?? '';
+
+// Resort ticker above the footer.
+const ticker = ['Moe SkiTour', 'Talma', 'Serena', 'Sveitsi', 'Ruka', 'Slopestyle', 'Big Air', 'Halfpipe', 'Kumpareet', 'Vuodesta 1980'];
+
 // Square icons from the shield badge; the wide header logo is squashed in a tab.
 const favicon = await getImage({ src: badge, width: 64, height: 64, format: 'png' });
 const touchIcon = await getImage({ src: badge, width: 180, height: 180, format: 'png' });
@@ -52,28 +60,61 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="theme-color" content="#f3e9d3" />
     <link rel="icon" type="image/png" sizes="64x64" href={favicon.src} />
     <link rel="apple-touch-icon" sizes="180x180" href={touchIcon.src} />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
     <header class="site-header">
-      <a class="logo" href="/"><Image src={logo} alt="Moebius Freestyle" height={112} /></a>
-      <nav>
-        {nav.map(([label, path]) => (
-          <a href={path ? `/${path}/` : '/'} aria-current={path === slug ? 'page' : undefined}>{label}</a>
-        ))}
-      </nav>
+      <div class="header-inner">
+        <a class="logo" href="/">
+          <Image src={logo} alt="Moebius Freestyle" height={112} />
+          <span class="logo-tag" aria-hidden="true">{since}</span>
+        </a>
+        <nav>
+          {nav.map(([label, path]) => (
+            <a href={path ? `/${path}/` : '/'} aria-current={path === slug ? 'page' : undefined}>{label}</a>
+          ))}
+        </nav>
+      </div>
     </header>
 
     <main>
-      {hero && <Band image={hero.image} heading={hero.heading} cta={hero.cta} level={1} />}
+      {hero && (
+        <Band
+          image={hero.image}
+          heading={hero.heading}
+          cta={hero.cta}
+          level={1}
+          eyebrow={eyebrow}
+          sub={sub}
+          tall={slug === ''}
+        />
+      )}
       <slot />
     </main>
 
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        {[0, 1].map(() => ticker.map((item, i) => <span>{i % 2 ? <em>{item}</em> : item} ✶</span>))}
+      </div>
+    </div>
+
     <footer class="site-footer" style={`background-image:url(${footerBg.src})`}>
       <div class="footer-inner">
-        <Image class="footer-badge" src={badge} alt="Moebius Freestyle Finland" width={440} />
+        <div class="footer-brand">
+          <Image class="footer-badge" src={badge} alt="Moebius Freestyle Finland" width={440} />
+          <svg class="footer-stamp" viewBox="0 0 150 150" aria-hidden="true">
+            <defs>
+              <path id="stamp-ring" d="M75,75 m-56,0 a56,56 0 1,1 112,0 a56,56 0 1,1 -112,0" />
+            </defs>
+            <circle cx="75" cy="75" r="72" />
+            <circle cx="75" cy="75" r="40" />
+            <text><textPath href="#stamp-ring" startOffset="0">Moebius · Freestyle · Helsinki ·</textPath></text>
+            <text class="snowflake" x="75" y="91" text-anchor="middle">❄</text>
+          </svg>
+        </div>
         <div>
           <h3>Freestyleseura Moebius ry</h3>
           <p>
@@ -96,6 +137,7 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
       </div>
       <div class="footer-bottom">
         <span>© Freestyleseura Moebius ry</span>
+        <span>Après-ski edition</span>
       </div>
     </footer>
   </body>
