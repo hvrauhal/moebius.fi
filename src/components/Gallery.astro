@@ -1,5 +1,7 @@
 ---
-// Grid of photos. Usage in MDX: <Gallery images={["a.jpg", "b.jpg"]} />
+// Grid of photos. Clicking a photo opens it at its original size in a
+// CSS-only lightbox (:target), so no JavaScript is needed.
+// Usage in MDX: <Gallery images={["a.jpg", "b.jpg"]} />
 import { Image } from 'astro:assets';
 import { resolveImage } from '../lib/images';
 
@@ -8,8 +10,20 @@ interface Props {
 }
 
 const images = Astro.props.images.map(resolveImage);
+// Ids must be unique per page, so derive them from the first file name.
+const prefix = 'g-' + Astro.props.images[0].replace(/\W+/g, '-');
 ---
 
 <div class="gallery">
-  {images.map((img) => <Image src={img} alt="" width={800} />)}
+  {images.map((img, i) => (
+    <a href={`#${prefix}-${i}`} id={`${prefix}-t${i}`} class="thumb">
+      <Image src={img} alt="" width={800} />
+    </a>
+  ))}
 </div>
+{images.map((img, i) => (
+  <div class="lightbox" id={`${prefix}-${i}`}>
+    <a class="lightbox-close" href={`#${prefix}-t${i}`} aria-label="Sulje">×</a>
+    <img src={img.src} width={img.width} height={img.height} alt="" loading="lazy" />
+  </div>
+))}
