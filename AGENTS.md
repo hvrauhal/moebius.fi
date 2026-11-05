@@ -79,8 +79,12 @@ Astro telemetry is disabled in the image.
 
 After any change, `make build` must succeed. Then check, as appropriate:
 
-- the page in `dist/` (or `make dev`) at desktop and phone widths; the live
-  site at www.moebius.fi is the reference design for layout questions;
+- the page in `dist/` (or `make dev`) at desktop and phone widths. The design
+  is a vintage Austrian après-ski poster: cream paper, alpine red, night blue
+  and mustard, condensed uppercase display type (Oswald), script accents
+  (Kaushan Script), hard offset shadows, duotoned photo heroes with a
+  cut-paper mountain ridge, and photos framed as taped-on postcards. New
+  elements should use the custom properties at the top of `global.css`;
 - no local links or image references in `dist/**/*.html` point at files that
   do not exist;
 - every `href="#..."` resolves to an element id on the same page (heading ids
@@ -100,12 +104,14 @@ are dead and were replaced with `skisport.fi` pages.
   `<style>` blocks to components, because content rendered from MDX would
   not receive them.
 - Do not add JavaScript to pages. The site ships none and should stay that
-  way unless a feature truly needs it.
+  way unless a feature truly needs it. Motion (hero rays, the resort ticker,
+  the footer stamp) is CSS animation and is switched off under
+  `prefers-reduced-motion`.
 - Preserve the original wording of the content; this is the club's own text.
 
 ## Known gaps
 
 - The footer credit reads "© Freestyleseura Moebius ry"; the live site shows
   the vendor's "© Snuup Oy".
-- Only the front page has been matched closely to the live design; the other
-  pages are a single-column rendering of the same content.
+- The design no longer follows the old Liquidblox site at all; it is a
+  poster-style redesign. The web fonts are loaded from Google Fonts.

@@ -66,13 +66,13 @@ without imports:
 
 | Component | Use |
 | --- | --- |
-| `<Band image="photo.jpg" heading="Haluatko mukaan?" />` | Full-width photo band with a heading; optional `cta={{ label, href }}` |
-| `<Gallery images={["a.jpg", "b.jpg"]} />` | Grid of photos |
+| `<Band image="photo.jpg" heading="Haluatko mukaan?" />` | Full-width duotoned photo band with a poster heading; optional `cta={{ label, href }}` |
+| `<Gallery images={["a.jpg", "b.jpg"]} />` | Grid of photos as taped-on postcards; click opens the original |
 | `<Logos images={["sponsor.png"]} />` | Row of sponsor logos; add `large` for the big front-page row |
 | `<Columns><div>…</div><div>…</div></Columns>` | Two side-by-side columns (stacked on phones); leave blank lines around the Markdown inside each `<div>` |
 | `<Center>…</Center>` | Centres the wrapped Markdown, e.g. a heading |
 | `<Wide>…</Wide>` | Full content width for the wrapped Markdown; images inside are shown whole and fitted to the width (use for result tables) |
-| `<Button href="/jasenyys/">Liity jäseneksi</Button>` | Gold button |
+| `<Button href="/jasenyys/">Liity jäseneksi</Button>` | Mustard poster button |
 | `<Social />` | Facebook / Instagram / YouTube icons |
 
 Images referenced by file name live in `src/assets/`. Drop new photos there and
