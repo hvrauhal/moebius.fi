@@ -44,7 +44,9 @@ without imports:
 | --- | --- |
 | `<Band image="photo.jpg" heading="Haluatko mukaan?" />` | Full-width photo band with a heading; optional `cta={{ label, href }}` |
 | `<Gallery images={["a.jpg", "b.jpg"]} />` | Grid of photos |
-| `<Logos images={["sponsor.png"]} />` | Row of sponsor logos |
+| `<Logos images={["sponsor.png"]} />` | Row of sponsor logos; add `large` for the big front-page row |
+| `<Columns><div>…</div><div>…</div></Columns>` | Two side-by-side columns (stacked on phones); leave blank lines around the Markdown inside each `<div>` |
+| `<Center>…</Center>` | Centres the wrapped Markdown, e.g. a heading |
 | `<Button href="/jasenyys/">Liity jäseneksi</Button>` | Gold button |
 | `<Social />` | Facebook / Instagram / YouTube icons |
 

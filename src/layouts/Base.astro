@@ -4,6 +4,7 @@ import type { ImageMetadata } from 'astro';
 import { Image, getImage } from 'astro:assets';
 import Band from '../components/Band.astro';
 import logo from '../assets/moebiuslogo5001503.png';
+import badge from '../assets/moebiuslogo.png';
 import footerPhoto from '../assets/freestyleskiingmoebius.jpg';
 
 interface Props {
@@ -68,6 +69,7 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
 
     <footer class="site-footer" style={`background-image:url(${footerBg.src})`}>
       <div class="footer-inner">
+        <Image class="footer-badge" src={badge} alt="Moebius Freestyle Finland" width={440} />
         <div>
           <h3>Freestyleseura Moebius ry</h3>
           <p>
@@ -89,7 +91,10 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
           </p>
         </div>
       </div>
-      <p class="copy">© Freestyleseura Moebius ry</p>
+      <div class="footer-bottom">
+        <span>© Freestyleseura Moebius ry</span>
+        <nav><a href="/jasenyys/">Jäsenyys</a><a href="/kuvagalleria/">Kuvagalleria</a><a href="/yhteystiedot/">Yhteystiedot</a></nav>
+      </div>
     </footer>
   </body>
 </html>

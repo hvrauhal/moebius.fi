@@ -3,6 +3,8 @@ import { getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Band from '../components/Band.astro';
 import Button from '../components/Button.astro';
+import Center from '../components/Center.astro';
+import Columns from '../components/Columns.astro';
 import Gallery from '../components/Gallery.astro';
 import Logos from '../components/Logos.astro';
 import Social from '../components/Social.astro';
@@ -13,5 +15,5 @@ const { Content } = await render(page);
 ---
 
 <Base {...page.data} slug="404">
-  <Content components={{ Band, Button, Gallery, Logos, Social }} />
+  <Content components={{ Band, Button, Center, Columns, Gallery, Logos, Social }} />
 </Base>

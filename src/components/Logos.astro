@@ -1,15 +1,18 @@
 ---
 // Row of sponsor / partner logos. Usage: <Logos images={["sglogowhite.png"]} />
+// Add `large` for the big main-sponsor row on the front page.
 import { Image } from 'astro:assets';
 import { resolveImage } from '../lib/images';
 
 interface Props {
   images: string[];
+  large?: boolean;
 }
 
+const { large = false } = Astro.props;
 const images = Astro.props.images.map(resolveImage);
 ---
 
-<div class="partners">
-  {images.map((img) => <Image src={img} alt="" height={144} />)}
+<div class:list={['partners', { large }]}>
+  {images.map((img) => <Image src={img} alt="" height={large ? 280 : 144} />)}
 </div>
