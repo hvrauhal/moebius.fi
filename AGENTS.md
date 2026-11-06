@@ -22,6 +22,7 @@ src/content.config.ts     frontmatter schema (title, lang, hero)
 src/layouts/Base.astro    <html>, header, nav, footer
 src/components/           Band, Button, Center, Columns, Gallery, Logos, Social, Wide
 src/lib/images.ts         resolves "photo.jpg" -> src/assets/photo.jpg
+src/lib/tables-plugin.mjs Markdown tables -> scrolling result tables (see Editing content)
 src/assets/               all images (optimised at build time, never hotlinked)
 src/styles/global.css     the only stylesheet
 src/pages/[...slug].astro renders a content entry; 404.astro renders 404.mdx
@@ -63,9 +64,13 @@ Astro telemetry is disabled in the image.
   (see `src/pages/[...slug].astro`), so content files must not `import`.
 - `Columns`, `Center` and `Wide` wrap Markdown; leave blank lines around the
   Markdown inside them or it will not be parsed.
-- `Gallery` is for photos and crops them to 3:2. Screenshots of result tables
-  and other images that must stay whole go in `<Wide>` as plain Markdown
-  images.
+- `Gallery` is for photos and crops them to 3:2. Images that must stay whole
+  go in `<Wide>` as plain Markdown images.
+- Results are Markdown tables, not screenshots. `src/lib/tables-plugin.mjs`
+  (a Sätteri hast plugin registered in `astro.config.mjs`) wraps each table
+  in a scrolling `div.table-wrap` and marks rows ranked 1–3 of a table whose
+  first column is `Sija` or `Rank` with the `podium` class; the styles are in
+  `global.css`. Wide tables (many score columns) go in `<Wide>`.
 - Images go in `src/assets/` and are referred to by file name in components
   (`<Gallery images={["a.jpg"]} />`) or by relative path in Markdown
   (`![](../../assets/a.jpg)`). Never link to `images.liquidblox.com`.
