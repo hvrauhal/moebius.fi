@@ -1,6 +1,7 @@
 ---
 // Row of sponsor / partner logos. Usage: <Logos images={["sglogowhite.png"]} />
 // Add `large` for the big main-sponsor row on the front page.
+// Logos listed in PARTNERS below link to the partner's site; others are plain images.
 import { Image } from 'astro:assets';
 import { resolveImage } from '../lib/images';
 
@@ -9,10 +10,29 @@ interface Props {
   large?: boolean;
 }
 
+const PARTNERS: Record<string, { name: string; href: string }> = {
+  'sglogowhite.png': { name: 'Skigarage', href: 'https://www.skigarage.net/' },
+  'talmaglacier.png': { name: 'Talma Ski', href: 'https://www.talmaski.fi/' },
+  'b2cf8d_talmaglacier.png': { name: 'Talma Ski', href: 'https://www.talmaski.fi/' },
+  'serenaskiaurinkologo.png': { name: 'Serena Ski', href: 'https://serena.fi/' },
+  'sveitsilogoboxed.png': { name: 'Sveitsin Hiihtokeskus', href: 'https://www.sveitsinhiihtokeskus.fi/' },
+  'd10d77_sveitsilogoboxed.png': { name: 'Sveitsin Hiihtokeskus', href: 'https://www.sveitsinhiihtokeskus.fi/' },
+};
+
 const { large = false } = Astro.props;
-const images = Astro.props.images.map(resolveImage);
+const height = large ? 280 : 144;
+const logos = Astro.props.images.map((name) => ({
+  img: resolveImage(name),
+  partner: typeof name === 'string' ? PARTNERS[name] : undefined,
+}));
 ---
 
 <div class:list={['partners', { large }]}>
-  {images.map((img) => <Image src={img} alt="" height={large ? 280 : 144} />)}
+  {logos.map(({ img, partner }) =>
+    partner ? (
+      <a href={partner.href}><Image src={img} alt={partner.name} height={height} /></a>
+    ) : (
+      <Image src={img} alt="" height={height} />
+    ),
+  )}
 </div>

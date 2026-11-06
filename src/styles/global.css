@@ -50,6 +50,7 @@ main > img, main > p > img { display:block; margin:24px auto; }
 .lightbox-close::after { content:"×"; position:absolute; top:12px; right:24px; font-size:44px; line-height:1; color:#fff; }
 .partners { display:flex; justify-content:center; align-items:center; gap:24px; margin:40px auto; flex-wrap:wrap; }
 .partners img { height:72px; width:auto; max-width:100%; object-fit:contain; }
+.partners a { display:block; line-height:0; }
 .partners.large { gap:8vw; margin:64px auto; }
 .partners.large img { height:140px; }
 .social { display:flex; justify-content:center; align-items:center; gap:32px; margin:24px auto 48px; }
