@@ -67,7 +67,7 @@ without imports:
 | Component | Use |
 | --- | --- |
 | `<Band image="photo.jpg" heading="Haluatko mukaan?" />` | Full-width photo band with a heading; optional `cta={{ label, href }}` |
-| `<Gallery images={["a.jpg", "b.jpg"]} />` | Grid of photos |
+| `<Gallery images={["a.jpg", "b.jpg"]} />` | Grid of photos, up to four per row, cropped to 3:2; clicking one opens it full size |
 | `<Logos images={["sponsor.png"]} />` | Row of sponsor logos; add `large` for the big front-page row. Logos listed in `PARTNERS` in `src/components/Logos.astro` link to the partner's site |
 | `<Columns><div>…</div><div>…</div></Columns>` | Two side-by-side columns (stacked on phones); leave blank lines around the Markdown inside each `<div>` |
 | `<Center>…</Center>` | Centres the wrapped Markdown, e.g. a heading |
@@ -78,7 +78,9 @@ without imports:
 Result tables are ordinary Markdown tables. Head the first column `Sija` or
 `Rank` and the rows placed 1–3 are highlighted; right-align number columns
 with `---:` in the separator line. A table wider than the column scrolls
-sideways, so put wide ones in `<Wide>`.
+sideways, so put wide ones in `<Wide>`. The SkiTour pages show the pattern:
+one `# Tulokset …` heading per event, a `##` heading per class, columns in
+the order of the result sheet, decimals with a comma.
 
 Images referenced by file name live in `src/assets/`. Drop new photos there and
 refer to them by name; Astro resizes and converts them at build time. Inline
