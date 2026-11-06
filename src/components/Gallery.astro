@@ -2,6 +2,8 @@
 // Grid of photos. Clicking a photo opens it at its original size in a
 // CSS-only lightbox (:target), so no JavaScript is needed.
 // Usage in MDX: <Gallery images={["a.jpg", "b.jpg"]} />
+// Up to four photos per row; a shorter gallery gets as many columns as photos
+// so the row stays full width (--cols is read by global.css).
 import { Image } from 'astro:assets';
 import { resolveImage } from '../lib/images';
 
@@ -14,7 +16,7 @@ const images = Astro.props.images.map(resolveImage);
 const prefix = 'g-' + Astro.props.images[0].replace(/\W+/g, '-');
 ---
 
-<div class="gallery">
+<div class="gallery" style={`--cols:${Math.min(images.length, 4)}`}>
   {images.map((img, i) => (
     <a href={`#${prefix}-${i}`} id={`${prefix}-t${i}`} class="thumb">
       <Image src={img} alt="" width={800} />
