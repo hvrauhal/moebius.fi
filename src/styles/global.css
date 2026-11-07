@@ -76,8 +76,6 @@ tr.podium td { background:#faf7e3; }
 
 /* Footer */
 .site-footer { background:#1a4b82 center/cover; color:var(--pale); position:relative; padding:56px 4vw 24px; }
-.site-footer::before { content:""; position:absolute; inset:0; background:#013665cc; }
-.site-footer > * { position:relative; }
 .site-footer a { color:#fff; }
 .site-footer h3 { color:#fff; font-size:16px; }
 .footer-inner { display:grid; grid-template-columns:220px 1fr 1fr; gap:32px 48px; align-items:center; max-width:1100px; margin:0 auto; }
