@@ -99,6 +99,8 @@ at render time as an inline `text-align` style.
 ### SkiTour result pages
 
 `skitour.mdx` is the coming season; `skitour-YYYY.mdx` holds a past season.
+The front page (`index.mdx`) repeats the coming season's event list in its
+"Moe SkiTour" column; when a new season is announced, update both files.
 A season page starts with the season standings (`# YYYY Kokonaistulokset`),
 then for each event, newest first, `# Tulokset …` followed by the original
 `# Kilpailukutsu …` text and the venue's `<Logos>` row.
