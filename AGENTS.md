@@ -103,7 +103,10 @@ at render time as an inline `text-align` style.
 ### SkiTour result pages
 
 `skitour.mdx` is the coming season; `skitour-YYYY.mdx` holds a past season.
-Past seasons appear automatically under SkiTour in the menu (newest first).
+The SkiTour menu lists the coming season, labelled from the first
+`# SkiTour YYYY` heading of `skitour.mdx`, then the past seasons, newest
+first; both update automatically. Past season pages open with the poster,
+so they do not repeat the `moebius91.png` SkiTour banner.
 The front page (`index.mdx`) repeats the coming season's event list in its
 "Moe SkiTour" column; when a new season is announced, update both files.
 A season page starts with the season standings (`# YYYY Kokonaistulokset`),

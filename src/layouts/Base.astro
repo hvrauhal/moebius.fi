@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { Image, getImage } from 'astro:assets';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import Band from '../components/Band.astro';
 import NavList, { type NavItem } from '../components/NavList.astro';
 import logo from '../assets/moebiuslogo5001503.png';
@@ -29,18 +29,21 @@ const {
   hero,
 } = Astro.props;
 
-// Past SkiTour seasons (skitour-YYYY.mdx), newest first, form the second
-// menu level under SkiTour; a new season page appears there automatically.
+// The SkiTour dropdown: the coming season (skitour.mdx, labelled with its
+// first "# SkiTour YYYY" heading) and then the past seasons (skitour-YYYY.mdx),
+// newest first. A new season page appears there automatically.
+const currentSeason = (await getEntry('pages', 'skitour'))?.body?.match(/^# (SkiTour \d{4})/m)?.[1] ?? 'SkiTour';
 const pastSeasons = (await getCollection('pages', (p) => /^skitour-\d{4}$/.test(p.id)))
   .map((p) => p.id)
   .sort()
   .reverse()
   .map((id) => ({ label: `SkiTour ${id.slice(-4)}`, path: id }));
+const seasons = [{ label: currentSeason, path: 'skitour' }, ...pastSeasons];
 
 const nav: NavItem[] = [
   { label: 'Etusivu', path: '' },
   { label: 'Ajankohtaista', path: 'ajankohtaista' },
-  { label: 'SkiTour', path: 'skitour', children: pastSeasons },
+  { label: 'SkiTour', path: 'skitour', children: seasons },
   { label: 'Jäsenyys', path: 'jasenyys' },
   { label: 'Harraste', path: 'harraste' },
   { label: 'Kuvagalleria', path: 'kuvagalleria' },
