@@ -69,7 +69,7 @@ without imports:
 | `<Band image="photo.jpg" heading="Haluatko mukaan?" />` | Full-width photo band with a heading; optional `cta={{ label, href }}` |
 | `<Gallery images={["a.jpg", "b.jpg"]} />` | Grid of photos, up to four per row, cropped to 3:2; clicking one opens it full size |
 | `<Logos images={["sponsor.png"]} />` | Row of sponsor logos; add `large` for the big front-page row. Logos listed in `PARTNERS` in `src/components/Logos.astro` link to the partner's site |
-| `<Columns><div>…</div><div>…</div></Columns>` | Two side-by-side columns (stacked on phones); leave blank lines around the Markdown inside each `<div>`. A column written as `<div class="wide-only">` is left out on phones |
+| `<Columns><div>…</div><div>…</div></Columns>` | Two side-by-side columns (stacked on phones); leave blank lines around the Markdown inside each `<div>`. A column written as `<div class="wide-only">` is left out on phones. When the left column is a picture and the right one starts with a heading, phones show the heading first, then the picture |
 | `<Center>…</Center>` | Centres the wrapped Markdown, e.g. a heading |
 | `<Wide>…</Wide>` | Full content width for the wrapped Markdown; use it for wide result tables. Images inside are shown whole and fitted to the width |
 | `<Button href="/jasenyys/">Liity jäseneksi</Button>` | Gold button |

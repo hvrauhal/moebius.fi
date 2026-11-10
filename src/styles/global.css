@@ -153,6 +153,14 @@ tr.podium td { background:#faf7e3; }
   .band:first-child { min-height:300px; }
   .band h1 { margin-bottom:20px; }
   .columns { grid-template-columns:1fr; }
+  /* An image column on the left followed by a text column that starts with
+     a heading: the heading goes first, then the image, then the text.
+     Browsers without :has() keep the plain stacked order. */
+  .columns:has(> div:first-child img):has(> div:last-child > :first-child:is(h1,h2,h3)) { display:flex; flex-direction:column; gap:0; }
+  .columns:has(> div:first-child img):has(> div:last-child > :first-child:is(h1,h2,h3)) > div:last-child { display:contents; }
+  .columns:has(> div:first-child img):has(> div:last-child > :first-child:is(h1,h2,h3)) > div:last-child > :first-child { order:-1; }
+  /* Flex items do not collapse margins; drop the top ones to keep the usual spacing. */
+  .columns:has(> div:first-child img):has(> div:last-child > :first-child:is(h1,h2,h3)) > div:first-child > :first-child, .columns:has(> div:first-child img):has(> div:last-child > :first-child:is(h1,h2,h3)) > div:last-child > :not(:first-child) { margin-top:0; }
   .wide-only { display:none; } /* e.g. a decorative column that would only push content down */
   .gallery { grid-template-columns:repeat(2,1fr); gap:12px; }
   .gallery .thumb:last-child:nth-child(odd) { grid-column:1 / -1; }
