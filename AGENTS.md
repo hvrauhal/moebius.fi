@@ -75,6 +75,9 @@ at render time as an inline `text-align` style.
   (see `src/pages/[...slug].astro`), so content files must not `import`.
 - `Columns`, `Center` and `Wide` wrap Markdown; leave blank lines around the
   Markdown inside them or it will not be parsed.
+- `class="wide-only"` on an element (usually a `Columns` `<div>`) hides it
+  at phone width, where the columns stack; the front page uses it for the
+  decorative club logo.
 - `Gallery` is for photos and crops them to 3:2, up to four per row; a
   gallery with fewer photos gets that many columns so the row stays full
   width. Images that must stay whole go in `<Wide>` as plain Markdown images.

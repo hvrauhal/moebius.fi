@@ -153,6 +153,7 @@ tr.podium td { background:#faf7e3; }
   .band:first-child { min-height:300px; }
   .band h1 { margin-bottom:20px; }
   .columns { grid-template-columns:1fr; }
+  .wide-only { display:none; } /* e.g. a decorative column that would only push content down */
   .gallery { grid-template-columns:repeat(2,1fr); gap:12px; }
   .gallery .thumb:last-child:nth-child(odd) { grid-column:1 / -1; }
   .partners.large img { height:90px; }
