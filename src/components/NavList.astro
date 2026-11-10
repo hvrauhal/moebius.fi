@@ -1,0 +1,72 @@
+---
+// One level of the site menu. Renders itself recursively for items that
+// have children, so the menu can be any number of levels deep.
+//
+// variant="bar": the desktop menu bar; a child level is a dropdown shown on
+//   hover/focus (CSS only).
+// variant="drawer": the phone menu, an off-screen drawer (a popover opened
+//   by the menu button in Base.astro). Each child level is a nested popover
+//   that slides in over its parent with a Back button. Popovers need no
+//   JavaScript: the browser handles opening, Esc, clicking outside and
+//   aria-expanded.
+// The two are separate elements so that resizing the window across the
+// breakpoint never animates the drawer.
+export interface NavItem {
+  label: string;
+  path: string;
+  children?: NavItem[];
+}
+
+interface Props {
+  items: NavItem[];
+  slug: string;
+  variant: 'bar' | 'drawer';
+  navId?: string;
+  labels?: { close: string; back: string; open: string };
+  depth?: number;
+}
+
+const { items, slug, variant, navId = '', labels, depth = 1 } = Astro.props;
+
+const href = (path: string) => (path ? `/${path}/` : '/');
+const contains = (item: NavItem): boolean =>
+  item.path === slug || (item.children ?? []).some(contains);
+---
+
+<ul class={`nav-list nav-level-${depth}`}>
+  {items.map((item) => {
+    const hasSub = !!item.children?.length;
+    const subId = `${navId}-${item.path || 'home'}`;
+    return (
+      <li class={hasSub ? 'has-sub' : undefined}>
+        <a
+          href={href(item.path)}
+          aria-current={item.path === slug ? 'page' : undefined}
+          class={item.path !== slug && contains(item) ? 'in-path' : undefined}
+        >{item.label}</a>
+        {hasSub && variant === 'bar' && (
+          <Astro.self items={item.children} slug={slug} variant={variant} depth={depth + 1} />
+        )}
+        {hasSub && variant === 'drawer' && labels && (
+          <>
+            <button class="sub-open" type="button" popovertarget={subId} aria-label={`${item.label}: ${labels.open}`}>
+              <span aria-hidden="true">›</span>
+            </button>
+            <div id={subId} class="drawer" popover>
+              <div class="drawer-head">
+                <button class="drawer-back" type="button" popovertarget={subId} popovertargetaction="hide">
+                  <span aria-hidden="true">‹</span> {labels.back}
+                </button>
+                <button class="drawer-close" type="button" popovertarget={navId} popovertargetaction="hide" aria-label={labels.close}>
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <a class="drawer-title-link" href={href(item.path)} aria-current={item.path === slug ? 'page' : undefined}>{item.label}</a>
+              <Astro.self items={item.children} slug={slug} variant={variant} navId={navId} labels={labels} depth={depth + 1} />
+            </div>
+          </>
+        )}
+      </li>
+    );
+  })}
+</ul>

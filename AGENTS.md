@@ -20,7 +20,8 @@ deployment). This file covers how to work on the repo safely.
 ```
 src/content/pages/*.mdx   one file per page; file name = URL slug
 src/content.config.ts     frontmatter schema (title, lang, hero)
-src/layouts/Base.astro    <html>, header, nav, footer
+src/layouts/Base.astro    <html>, header, nav (menu items), footer
+src/components/NavList.astro  the menu, any depth: desktop dropdowns, phone drawer
 src/components/           Band, Button, Center, Columns, Gallery, Logos, Social, Wide
 src/lib/images.ts         resolves "photo.jpg" -> src/assets/photo.jpg
 src/lib/tables-plugin.mjs Markdown tables -> scrolling result tables (see Editing content)
@@ -99,6 +100,7 @@ at render time as an inline `text-align` style.
 ### SkiTour result pages
 
 `skitour.mdx` is the coming season; `skitour-YYYY.mdx` holds a past season.
+Past seasons appear automatically under SkiTour in the menu (newest first).
 The front page (`index.mdx`) repeats the coming season's event list in its
 "Moe SkiTour" column; when a new season is announced, update both files.
 A season page starts with the season standings (`# YYYY Kokonaistulokset`),
@@ -165,6 +167,12 @@ not open them.
 - Keep the stylesheet as the single `global.css`; do not add scoped
   `<style>` blocks to components, because content rendered from MDX would
   not receive them.
+- The phone menu (≤ 900 px) is an off-screen drawer built on the HTML
+  popover API, so it needs no JavaScript; each submenu level is a nested
+  popover sliding over its parent. The drawer is a separate element from
+  the desktop bar, so resizing across the breakpoint does not animate it
+  (do not merge the two). Browsers without popover support fall
+  back to a plain two-column list of the top level.
 - Do not add JavaScript to pages. The site ships none and should stay that
   way unless a feature truly needs it.
 - Preserve the original wording of the content; this is the club's own text.

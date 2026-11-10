@@ -2,7 +2,9 @@
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { Image, getImage } from 'astro:assets';
+import { getCollection } from 'astro:content';
 import Band from '../components/Band.astro';
+import NavList, { type NavItem } from '../components/NavList.astro';
 import logo from '../assets/moebiuslogo5001503.png';
 import badge from '../assets/moebiuslogo.png';
 import footerPhoto from '../assets/freestyleskiingmoebius.jpg';
@@ -27,17 +29,33 @@ const {
   hero,
 } = Astro.props;
 
-const nav = [
-  ['Etusivu', ''],
-  ['Ajankohtaista', 'ajankohtaista'],
-  ['SkiTour', 'skitour'],
-  ['Jäsenyys', 'jasenyys'],
-  ['Harraste', 'harraste'],
-  ['Kuvagalleria', 'kuvagalleria'],
-  ['Yhteystiedot', 'yhteystiedot'],
-  ['In English', 'in-english'],
-  ['På Svenska', 'pa-svenska'],
+// Past SkiTour seasons (skitour-YYYY.mdx), newest first, form the second
+// menu level under SkiTour; a new season page appears there automatically.
+const pastSeasons = (await getCollection('pages', (p) => /^skitour-\d{4}$/.test(p.id)))
+  .map((p) => p.id)
+  .sort()
+  .reverse()
+  .map((id) => ({ label: `SkiTour ${id.slice(-4)}`, path: id }));
+
+const nav: NavItem[] = [
+  { label: 'Etusivu', path: '' },
+  { label: 'Ajankohtaista', path: 'ajankohtaista' },
+  { label: 'SkiTour', path: 'skitour', children: pastSeasons },
+  { label: 'Jäsenyys', path: 'jasenyys' },
+  { label: 'Harraste', path: 'harraste' },
+  { label: 'Kuvagalleria', path: 'kuvagalleria' },
+  { label: 'Yhteystiedot', path: 'yhteystiedot' },
+  { label: 'In English', path: 'in-english' },
+  { label: 'På Svenska', path: 'pa-svenska' },
 ];
+
+// Menu button and drawer labels in the page's language.
+const allMenuLabels = {
+  fi: { menu: 'Valikko', nav: 'Päävalikko', close: 'Sulje valikko', back: 'Takaisin', open: 'avaa alavalikko' },
+  en: { menu: 'Menu', nav: 'Main menu', close: 'Close menu', back: 'Back', open: 'open submenu' },
+  sv: { menu: 'Meny', nav: 'Huvudmeny', close: 'Stäng menyn', back: 'Tillbaka', open: 'öppna undermeny' },
+};
+const menuLabels = allMenuLabels[lang as keyof typeof allMenuLabels] ?? allMenuLabels.fi;
 
 // Square icons from the shield badge; the wide header logo is squashed in a tab.
 const favicon = await getImage({ src: badge, width: 64, height: 64, format: 'png' });
@@ -59,10 +77,20 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
   <body>
     <header class="site-header">
       <a class="logo" href="/"><Image src={logo} alt="Moebius Freestyle" height={112} /></a>
-      <nav>
-        {nav.map(([label, path]) => (
-          <a href={path ? `/${path}/` : '/'} aria-current={path === slug ? 'page' : undefined}>{label}</a>
-        ))}
+      <nav class="site-nav" aria-label={menuLabels.nav}>
+        <NavList items={nav} slug={slug} variant="bar" />
+      </nav>
+      <button class="menu-button" type="button" popovertarget="drawer-nav">
+        <span class="burger" aria-hidden="true"></span>{menuLabels.menu}
+      </button>
+      <nav id="drawer-nav" class="drawer" popover aria-label={menuLabels.nav}>
+        <div class="drawer-head">
+          <span class="drawer-title">{menuLabels.menu}</span>
+          <button class="drawer-close" type="button" popovertarget="drawer-nav" popovertargetaction="hide" aria-label={menuLabels.close}>
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <NavList items={nav} slug={slug} variant="drawer" navId="drawer-nav" labels={menuLabels} />
       </nav>
     </header>
 
