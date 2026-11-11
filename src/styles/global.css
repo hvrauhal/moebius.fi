@@ -74,6 +74,7 @@ main > *:not(.band):not(.gallery):not(.columns):not(.wide):not(.lightbox) { max-
 .wide img { display:block; max-width:100%; width:auto; height:auto; margin:24px auto; }
 .columns { display:grid; grid-template-columns:1fr 1fr; gap:32px 80px; align-items:start; max-width:1100px; margin:0 auto; padding:0 20px; }
 .columns img { display:block; width:100%; height:auto; }
+@media (min-width:701px) { .columns { padding-top:48px; } .columns > div > :first-child { margin-top:0; } } /* section spacing above the row; tops of side-by-side columns aligned */
 .center { text-align:center; }
 .center h2 { font-size:40px; margin:64px 0 24px; }
 
