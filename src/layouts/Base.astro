@@ -66,7 +66,9 @@ const menuLabels = allMenuLabels[lang as keyof typeof allMenuLabels] ?? allMenuL
 // Square icons from the shield badge; the wide header logo is squashed in a tab.
 const favicon = await getImage({ src: badge, width: 64, height: 64, format: 'png' });
 const touchIcon = await getImage({ src: badge, width: 180, height: 180, format: 'png' });
-const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' });
+// The footer is very tall on phones, where `cover` scales the photo up to
+// the footer's height, so it needs far more pixels than its desktop width.
+const footerBg = await getImage({ src: footerPhoto, width: 3600, format: 'webp' });
 // Link previews (Facebook, Instagram, WhatsApp, ...) need absolute URLs.
 const shareImage = await getImage({ src: image ?? hero?.image ?? defaultShare, width: 1200, format: 'jpg' });
 const pageUrl = new URL(Astro.url.pathname, Astro.site);
