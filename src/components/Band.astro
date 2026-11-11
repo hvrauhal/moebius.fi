@@ -9,18 +9,25 @@ interface Props {
   heading: string;
   cta?: { label: string; href: string };
   level?: 1 | 2;
+  // Middle of the heading, as % of the band's height from the top.
+  headingAt?: number;
+  // Point of the photo kept in view when narrow screens crop its sides,
+  // as % of its width from the left.
+  focusX?: number;
 }
 
-const { image, heading, cta, level = 2 } = Astro.props;
+const { image, heading, cta, level = 2, headingAt, focusX } = Astro.props;
 const meta = resolveImage(image);
 const bg = await getImage({ src: meta, width: 1600, format: 'webp' });
 // A page hero keeps the photo's own proportions, so the whole picture is
 // shown at any width instead of a zoomed, cropped slice.
 const ratio = level === 1 ? `;aspect-ratio:${meta.width}/${meta.height}` : '';
 const Heading = level === 1 ? 'h1' : 'h2';
+const placed = headingAt === undefined ? '' : `;--heading-at:${headingAt}%`;
+const focus = focusX === undefined ? '' : `;background-position:${focusX}% center`;
 ---
 
-<section class="band" style={`background-image:url(${bg.src})${ratio}`}>
+<section class:list={['band', { 'band-placed': placed }]} style={`background-image:url(${bg.src})${ratio}${placed}${focus}`}>
   <Heading>{heading}</Heading>
   {cta && <p><a href={cta.href}>{cta.label}</a></p>}
 </section>

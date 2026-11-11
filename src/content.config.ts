@@ -19,6 +19,14 @@ const pages = defineCollection({
           image: image(),
           heading: z.string(),
           cta: z.object({ label: z.string(), href: z.string() }).optional(),
+          // Where the middle of the heading sits, as a percentage of the band's
+          // height from the top, to fit it into empty space in the photo.
+          // Without it the heading is centred.
+          headingAt: z.number().min(0).max(100).optional(),
+          // On phones the band is taller than the photo, so its sides are
+          // cropped. This is the point to keep in view, as a percentage of the
+          // photo's width from the left; without it the middle is kept.
+          focusX: z.number().min(0).max(100).optional(),
         })
         .optional(),
     }),

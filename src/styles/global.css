@@ -85,6 +85,11 @@ main > *:not(.band):not(.gallery):not(.columns):not(.wide):not(.lightbox) { max-
 .band h1 { font-size:clamp(36px,8vw,100px); margin-bottom:32px; }
 .band h2 { font-size:clamp(32px,5vw,64px); }
 .band p { margin:0; }
+/* Heading moved up or down into empty space in the photo (hero headingAt) */
+.band-placed { position:relative; }
+.band-placed > h1, .band-placed > h2 { position:absolute; left:0; right:0; top:var(--heading-at); transform:translateY(-50%); margin:0; padding:0 20px; }
+/* may shrink further on narrow phones, so a short heading stays on one line in its gap */
+.band-placed > h1 { font-size:clamp(28px,8vw,100px); }
 
 /* Buttons */
 .cta { text-align:center; margin:28px auto; }

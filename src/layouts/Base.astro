@@ -114,7 +114,7 @@ const shareUrl = new URL(shareImage.src, Astro.site);
     </header>
 
     <main>
-      {hero && <Band image={hero.image} heading={hero.heading} cta={hero.cta} level={1} />}
+      {hero && <Band image={hero.image} heading={hero.heading} cta={hero.cta} headingAt={hero.headingAt} focusX={hero.focusX} level={1} />}
       <slot />
     </main>
 
