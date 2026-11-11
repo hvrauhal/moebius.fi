@@ -1,6 +1,7 @@
 ---
 // Grid of photos. Clicking a photo opens it at its original size in a
-// CSS-only lightbox (:target), so no JavaScript is needed.
+// CSS-only lightbox (:target), so no JavaScript is needed. Arrows on either
+// side link to the previous and next photo's lightbox, wrapping round.
 // Usage in MDX: <Gallery images={["a.jpg", "b.jpg"]} />
 // Up to four photos per row; a shorter gallery gets as many columns as photos
 // so the row stays full width (--cols is read by global.css).
@@ -27,5 +28,9 @@ const prefix = 'g-' + Astro.props.images[0].replace(/\W+/g, '-');
   <div class="lightbox" id={`${prefix}-${i}`}>
     <a class="lightbox-close" href={`#${prefix}-t${i}`} aria-label="Sulje">×</a>
     <img src={img.src} width={img.width} height={img.height} alt="" loading="lazy" />
+    {images.length > 1 && <>
+      <a class="lightbox-prev" href={`#${prefix}-${(i - 1 + images.length) % images.length}`} aria-label="Edellinen">‹</a>
+      <a class="lightbox-next" href={`#${prefix}-${(i + 1) % images.length}`} aria-label="Seuraava">›</a>
+    </>}
   </div>
 ))}

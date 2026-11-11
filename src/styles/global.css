@@ -100,6 +100,10 @@ main > img, main > p > img { display:block; margin:24px auto; }
 .lightbox img { position:relative; max-width:96vw; max-height:96vh; width:auto; height:auto; }
 .lightbox-close { position:absolute; inset:0; font-size:0; cursor:zoom-out; }
 .lightbox-close::after { content:"×"; position:absolute; top:12px; right:24px; font-size:44px; line-height:1; color:#fff; }
+.lightbox-prev, .lightbox-next { position:absolute; top:50%; transform:translateY(-50%); width:56px; height:72px; display:flex; align-items:center; justify-content:center; background:#0008; color:#fff; font-size:48px; line-height:1; text-decoration:none; border-radius:3px; }
+.lightbox-prev:hover, .lightbox-next:hover { background:#000c; }
+.lightbox-prev { left:12px; }
+.lightbox-next { right:12px; }
 .partners { display:flex; justify-content:center; align-items:center; gap:24px; margin:40px auto; flex-wrap:wrap; }
 .partners img { height:72px; width:auto; max-width:100%; object-fit:contain; }
 .partners a { display:block; line-height:0; }
