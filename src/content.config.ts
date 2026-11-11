@@ -10,6 +10,9 @@ const pages = defineCollection({
       title: z.string(),
       lang: z.enum(['fi', 'en', 'sv']).default('fi'),
       description: z.string().optional(),
+      // Optional picture shown when the page is shared (og:image); defaults to
+      // the hero image, else a club photo.
+      image: image().optional(),
       // Optional full-width photo band with a heading at the top of the page.
       hero: z
         .object({

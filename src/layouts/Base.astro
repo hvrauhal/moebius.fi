@@ -8,11 +8,13 @@ import NavList, { type NavItem } from '../components/NavList.astro';
 import logo from '../assets/moebiuslogo5001503.png';
 import badge from '../assets/moebiuslogo.png';
 import footerPhoto from '../assets/freestyleskiingmoebius.jpg';
+import defaultShare from '../assets/moebiusfreestyle1980x720px.jpg';
 
 interface Props {
   title: string;
   lang?: string;
   description?: string;
+  image?: ImageMetadata;
   slug: string;
   hero?: {
     image: ImageMetadata;
@@ -27,6 +29,7 @@ const {
   description = 'Freestyleseura Moebius ry on vuonna 1980 perustettu pääkaupunkiseudulla toimiva freestyleseura.',
   slug,
   hero,
+  image,
 } = Astro.props;
 
 // The SkiTour dropdown: the coming season (skitour.mdx, labelled with its
@@ -64,6 +67,10 @@ const menuLabels = allMenuLabels[lang as keyof typeof allMenuLabels] ?? allMenuL
 const favicon = await getImage({ src: badge, width: 64, height: 64, format: 'png' });
 const touchIcon = await getImage({ src: badge, width: 180, height: 180, format: 'png' });
 const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' });
+// Link previews (Facebook, Instagram, WhatsApp, ...) need absolute URLs.
+const shareImage = await getImage({ src: image ?? hero?.image ?? defaultShare, width: 1200, format: 'jpg' });
+const pageUrl = new URL(Astro.url.pathname, Astro.site);
+const shareUrl = new URL(shareImage.src, Astro.site);
 ---
 
 <!doctype html>
@@ -75,6 +82,13 @@ const footerBg = await getImage({ src: footerPhoto, width: 1600, format: 'webp' 
     <meta name="description" content={description} />
     <link rel="icon" type="image/png" sizes="64x64" href={favicon.src} />
     <link rel="apple-touch-icon" sizes="180x180" href={touchIcon.src} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Freestyleseura Moebius ry" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={pageUrl.href} />
+    <meta property="og:image" content={shareUrl.href} />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="sitemap" href="/sitemap-index.xml" />
   </head>
   <body>
