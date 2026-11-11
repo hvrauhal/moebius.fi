@@ -109,6 +109,10 @@ main > img, main > p > img { display:block; margin:24px auto; }
 .social img { height:56px; width:auto; }
 main > iframe { display:block; width:100%; min-height:600px; border:0; }
 
+.embeds { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:16px; margin:16px 0 32px; }
+.embeds iframe { width:100%; height:700px; border:0; }
+.embeds iframe[title="YouTube"] { height:auto; aspect-ratio:16/9; align-self:start; }
+
 /* Lists */
 li { margin-top:4px; }
 main > ul:not(.band):not(.gallery):not(.columns):not(.wide):not(.lightbox) { padding-left:40px; margin-top:0; margin-bottom:0; }
