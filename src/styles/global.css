@@ -159,6 +159,12 @@ tr.podium td { background:#faf7e3; }
   .band h1 { margin-bottom:20px; }
   .columns { grid-template-columns:1fr; }
   .wide-only { display:none; } /* e.g. a decorative column that would only push content down */
+  /* An image that belongs to the heading below it: more room above, close to the heading */
+  main > p:has(img:only-child):has(+ :is(h1,h2)) { margin:0; }
+  main > p:has(img:only-child):has(+ :is(h1,h2)) img { margin:40px auto 8px; }
+  main > p:has(img:only-child) + :is(h1,h2) { margin-top:0; }
+  .columns > div:has(> p:only-child img):has(+ div > h2:first-child) { margin:16px 0 -24px; }
+  .columns > div:has(> p:only-child img) + div > h2:first-child { margin-top:0; }
   .gallery { grid-template-columns:repeat(2,1fr); gap:12px; }
   .gallery .thumb:last-child:nth-child(odd) { grid-column:1 / -1; }
   .partners.large img { height:90px; }
