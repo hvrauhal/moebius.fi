@@ -165,5 +165,5 @@ tr.podium td { background:#faf7e3; }
   table { font-size:13px; }
   th, td { padding:5px 8px; }
   .footer-inner { grid-template-columns:1fr; justify-items:start; }
-  .footer-badge { width:160px; }
+  .footer-badge { width:160px; justify-self:center; }
 }
