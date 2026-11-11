@@ -18,7 +18,10 @@ interface Props {
 
 const { image, heading, cta, level = 2, headingAt, focusX } = Astro.props;
 const meta = resolveImage(image);
-const bg = await getImage({ src: meta, width: 1600, format: 'webp' });
+// Photos are served 1600 px wide, unless a sharper, larger-than-1920 px
+// source was provided on purpose (the front page): that is kept up to 3840 px.
+const width = meta.width > 1920 ? Math.min(meta.width, 3840) : 1600;
+const bg = await getImage({ src: meta, width, format: 'webp' });
 // A page hero keeps the photo's own proportions, so the whole picture is
 // shown at any width instead of a zoomed, cropped slice.
 const ratio = level === 1 ? `;aspect-ratio:${meta.width}/${meta.height}` : '';
