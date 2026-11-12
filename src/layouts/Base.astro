@@ -99,8 +99,8 @@ const shareUrl = new URL(shareImage.src, Astro.site);
       <nav class="site-nav" aria-label={menuLabels.nav}>
         <NavList items={nav} slug={slug} variant="bar" />
       </nav>
-      <button class="menu-button" type="button" popovertarget="drawer-nav">
-        <span class="burger" aria-hidden="true"></span>{menuLabels.menu}
+      <button class="menu-button" type="button" popovertarget="drawer-nav" aria-label={menuLabels.menu}>
+        <span class="burger" aria-hidden="true"></span>
       </button>
       <nav id="drawer-nav" class="drawer" popover aria-label={menuLabels.nav}>
         <div class="drawer-head">
